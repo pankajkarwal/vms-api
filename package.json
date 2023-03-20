@@ -4,7 +4,12 @@
   "description": "VMS API connection with mongodb ",
   "main": "connection.js",
   "scripts": {
+    "server": "babel-node ./dist/index.js",
     "start": "nodemon --exec babel-node ./nodemon",
+    "server:prod": "babel-node ./dist/index.js",
+    "build": "babel ./src --out-dir dist",
+    "prod": "NODE_ENV=development npm-run-all clean build server:prod",
+    "prod:build": "NODE_ENV=production npm-run-all clean build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
