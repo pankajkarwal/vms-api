@@ -7,6 +7,7 @@ const logger = require('morgan')
 const cors = require('cors')
 const indexRouter = require('./routes/Index')
 const visitorRouter = require('./routes/visitor')
+const countryRouter = require('./routes/country')
 
 const app = express()
 const dotenv = require('dotenv');
@@ -24,5 +25,6 @@ app.use(cookieParser())
 
 app.use('/', indexRouter)
 app.use('/visitors', visitorRouter)
+app.use('/country', countryRouter)
 
 module.exports = app
