@@ -15,11 +15,18 @@ export default {
             DELETE:"Country deleted successfully",
             UPDATE:"Country updated successfully",
         },
+        CITY:{
+            NAME_EXISTS: "City already exists with this name!",
+            ADD:"City added successfully",
+            DELETE:"City deleted successfully",
+            UPDATE:"City updated successfully",
+        },
     },    
     STATUS_CODES: {
         USER_SET_PASSWORD_ALREADY: 450,
         USER_ACTIVE_SET_PASSWORD: 451,
         VISITOR_WITH_NAME_EXISTS: 452,
         COUNTRY_WITH_NAME_EXISTS: 453,
+        CITY_WITH_NAME_EXISTS: 454,
       },
 }

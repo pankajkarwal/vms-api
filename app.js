@@ -8,6 +8,7 @@ const cors = require('cors')
 const indexRouter = require('./routes/Index')
 const visitorRouter = require('./routes/visitor')
 const countryRouter = require('./routes/country')
+const cityRouter = require('./routes/city')
 
 const app = express()
 const dotenv = require('dotenv');
@@ -26,5 +27,6 @@ app.use(cookieParser())
 app.use('/', indexRouter)
 app.use('/visitors', visitorRouter)
 app.use('/country', countryRouter)
+app.use('/city', cityRouter)
 
 module.exports = app
