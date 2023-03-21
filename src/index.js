@@ -5,15 +5,27 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const logger = require('morgan')
 const cors = require('cors')
-const indexRouter = require('./src/routes/Index')
-const visitorRouter = require('./src/routes/visitor')
-const countryRouter = require('./src/routes/country')
-const cityRouter = require('./src/routes/city')
 
-const app = express()
-const dotenv = require('dotenv');
-dotenv.config()
 
+// const dotenv = require('dotenv');
+// dotenv.config()
+
+const http = require("http");
+const app = require("./app");
+const server = http.createServer(app);
+
+const { API_PORT } = process.env;
+const port = process.env.PORT || API_PORT;
+
+// server listening 
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+const indexRouter = require('./routes/Index')
+const visitorRouter = require('./routes/visitor')
+const countryRouter = require('./routes/country')
+const cityRouter = require('./routes/city')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())

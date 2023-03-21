@@ -1,0 +1,5 @@
+{
+    "exec": "npm run dev:windows",
+    "watch": ["src/*", "public/*"],
+    "ext": "js"
+}

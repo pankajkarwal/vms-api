@@ -4,10 +4,11 @@
  * Module dependencies.
  */
 
-var app = require('./app');
+var app = require('./src');
 var debug = require('debug')('vms-api:server');
 var http = require('http');
 var dbConnection = require('./connection');
+
 
 /**
  * Get port from environment and store in Express.
