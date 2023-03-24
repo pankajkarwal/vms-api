@@ -1,6 +1,14 @@
 export default {
     ERRORS:{
-        DEFAULT_ERROR:"internal server error"
+        DEFAULT_ERROR:"internal server error",
+        ALL_INPUTS_REQUIRED:"All input is required",
+        USER_EXISTS_LOGIN:"User Already Exist. Please Login",
+        TOKEN_REQUIRED:"A token is required for authentication",
+        TOKEN_INVALID:"Invalid Token"
+    },
+    SECURITY:{
+        HASH_ROUND_STRING_LENGTH:10,
+        TOKEN_EXPIRE_DURATION:'2h'
     },
     MESSAGES:{
         VISITOR:{
@@ -21,6 +29,12 @@ export default {
             DELETE:"City deleted successfully",
             UPDATE:"City updated successfully",
         },
+        USER:{
+            NAME_EXISTS: "User already exists with this name!",
+            ADD:"User added successfully",
+            DELETE:"User deleted successfully",
+            UPDATE:"User updated successfully",
+        },
     },    
     STATUS_CODES: {
         USER_SET_PASSWORD_ALREADY: 450,
@@ -28,5 +42,6 @@ export default {
         VISITOR_WITH_NAME_EXISTS: 452,
         COUNTRY_WITH_NAME_EXISTS: 453,
         CITY_WITH_NAME_EXISTS: 454,
+        USER_WITH_NAME_EXISTS: 455,
       },
 }

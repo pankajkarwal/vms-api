@@ -22,10 +22,28 @@ server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
+const nonAuthURL=[
+  '/user/login',
+  '/user/add'
+]
+
+
+const auth = require("./middleware/auth");
+
+ app.use(async (req, res, next) => {
+  if (!nonAuthURL.includes(req.url)) {
+     //app.use(auth)
+     auth(req,res,next)
+  }
+  next();
+})
+
 const indexRouter = require('./routes/Index')
 const visitorRouter = require('./routes/visitor')
 const countryRouter = require('./routes/country')
 const cityRouter = require('./routes/city')
+const userRouter = require('./routes/user')
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
@@ -36,9 +54,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
+
 app.use('/', indexRouter)
 app.use('/visitors', visitorRouter)
 app.use('/country', countryRouter)
 app.use('/city', cityRouter)
+app.use('/user', userRouter)
 
 module.exports = app
