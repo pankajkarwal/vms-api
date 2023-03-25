@@ -1,5 +1,6 @@
 const express = require('express')
-
+const app = require("../app");
+const auth = require("../middleware/auth");
 const router = express.Router();
 import VisitorController from '../controllers/VisitorController';
 const visitorController = new VisitorController();

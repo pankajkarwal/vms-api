@@ -17,9 +17,9 @@ var verifyToken = function verifyToken(req, res, next) {
   try {
     var decoded = jwt.verify(token, config.TOKEN_KEY);
     req.user = decoded;
+    next();
   } catch (err) {
     return res.status(401).send(constants.ERRORS.TOKEN_INVALID);
   }
-  return next();
 };
 module.exports = verifyToken;

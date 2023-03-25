@@ -6,9 +6,8 @@ const bodyParser = require('body-parser')
 const logger = require('morgan')
 const cors = require('cors')
 
-
-// const dotenv = require('dotenv');
-// dotenv.config()
+const dotenv = require('dotenv');
+dotenv.config()
 
 const http = require("http");
 const app = require("./app");
@@ -22,43 +21,57 @@ server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-const nonAuthURL=[
+const nonAuthURL = [
   '/user/login',
   '/user/add'
 ]
-
-
-const auth = require("./middleware/auth");
-
- app.use(async (req, res, next) => {
-  if (!nonAuthURL.includes(req.url)) {
-     //app.use(auth)
-     auth(req,res,next)
-  }
-  next();
-})
 
 const indexRouter = require('./routes/Index')
 const visitorRouter = require('./routes/visitor')
 const countryRouter = require('./routes/country')
 const cityRouter = require('./routes/city')
 const userRouter = require('./routes/user')
+const auth = require("./middleware/auth");
+
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(cors())
+app.use(function (req, res, next) {
+  if (req.get("x-amz-sns-message-type")) {
+    req.headers["content-type"] = "application/json";
+  }
+  next();
+});
+app.use(
+  cors({
+    origin: "*",
+    methods: ["PUT", "POST", "GET", "DELETE", "OPTIONS", "PATCH"],
+    allowedHeaders: [
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-IDENTITY",
+    ],
+  })
+);
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use((req, res, next) => {
+  if (!nonAuthURL.includes(req.url) && req?.headers["access-control-request-headers"] != 'authorization') {
+    auth(req, res, next)
+  }
+  else {
+    next();
+  }
+})
 
-
-app.use('/', indexRouter)
 app.use('/visitors', visitorRouter)
 app.use('/country', countryRouter)
 app.use('/city', cityRouter)
 app.use('/user', userRouter)
+app.use('/', indexRouter)
+
 
 module.exports = app
