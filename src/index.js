@@ -6,8 +6,8 @@ const bodyParser = require('body-parser')
 const logger = require('morgan')
 const cors = require('cors')
 
-const dotenv = require('dotenv');
-dotenv.config()
+// const dotenv = require('dotenv');
+// dotenv.config()
 
 const http = require("http");
 const app = require("./app");

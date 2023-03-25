@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
   }
 
   if (!token) {
-    return res.status(403).send(constants.ERRORS.TOKEN_REQUIRED);
+    return res.status(400).send(constants.ERRORS.TOKEN_REQUIRED);
   }
 
   try {

@@ -7,12 +7,13 @@ var config = process.env;
 var verifyToken = function verifyToken(req, res, next) {
   var authorizationHeader = req.headers.authorization;
   var token;
+  console.log("Header", req.headers);
   if (authorizationHeader) {
     token = req.headers.authorization.split(' ')[1]; // Bearer <token>
   }
 
   if (!token) {
-    return res.status(403).send(constants.ERRORS.TOKEN_REQUIRED);
+    return res.status(400).send(constants.ERRORS.TOKEN_REQUIRED);
   }
   try {
     var decoded = jwt.verify(token, config.TOKEN_KEY);

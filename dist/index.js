@@ -7,8 +7,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var cors = require('cors');
-var dotenv = require('dotenv');
-dotenv.config();
+
+// const dotenv = require('dotenv');
+// dotenv.config()
+
 var http = require("http");
 var app = require("./app");
 var server = http.createServer(app);
