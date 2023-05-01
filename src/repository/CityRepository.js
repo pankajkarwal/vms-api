@@ -92,9 +92,11 @@ const addCity = async (req, res) => {
 const updateCity = async (req, res) => {
     try {
         const payload = req.body.cityDetails;
+        console.log("----------- Data is ---------------",payload)
         await CityModel.updateOne({ _id: payload._id }, { '$set': payload }, function (err) {
             if (err) {
-                sendError(err, constants.ERRORS.DEFAULT_ERROR);
+                res.status(constants.STATUS_CODES.CITY_WITH_NAME_EXISTS).send({ error: constants.MESSAGES.CITY.NAME_EXISTS })
+                // sendError(constants.STATUS_CODES.CITY_WITH_NAME_EXISTS, res);
             } else {
                 response.data = payload._id;
                 response.status = 200;

@@ -221,14 +221,18 @@ var updateCity = /*#__PURE__*/function () {
         case 0:
           _context8.prev = 0;
           payload = req.body.cityDetails;
-          _context8.next = 4;
+          console.log("----------- Data is ---------------", payload);
+          _context8.next = 5;
           return _CityMaster["default"].updateOne({
             _id: payload._id
           }, {
             '$set': payload
           }, function (err) {
             if (err) {
-              sendError(err, _constants["default"].ERRORS.DEFAULT_ERROR);
+              res.status(_constants["default"].STATUS_CODES.CITY_WITH_NAME_EXISTS).send({
+                error: _constants["default"].MESSAGES.CITY.NAME_EXISTS
+              });
+              // sendError(constants.STATUS_CODES.CITY_WITH_NAME_EXISTS, res);
             } else {
               response.data = payload._id;
               response.status = 200;
@@ -237,19 +241,19 @@ var updateCity = /*#__PURE__*/function () {
               return res.status(200).json(response);
             }
           });
-        case 4:
-          _context8.next = 10;
+        case 5:
+          _context8.next = 11;
           break;
-        case 6:
-          _context8.prev = 6;
+        case 7:
+          _context8.prev = 7;
           _context8.t0 = _context8["catch"](0);
           console.log("---------------- Error ------------------------", _context8.t0);
           return _context8.abrupt("return", _context8.t0);
-        case 10:
+        case 11:
         case "end":
           return _context8.stop();
       }
-    }, _callee8, null, [[0, 6]]);
+    }, _callee8, null, [[0, 7]]);
   }));
   return function updateCity(_x15, _x16) {
     return _ref8.apply(this, arguments);

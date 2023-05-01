@@ -7,7 +7,6 @@ var config = process.env;
 var verifyToken = function verifyToken(req, res, next) {
   var authorizationHeader = req.headers.authorization;
   var token;
-  console.log("Header", req.headers);
   if (authorizationHeader) {
     token = req.headers.authorization.split(' ')[1]; // Bearer <token>
   }

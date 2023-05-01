@@ -92,6 +92,10 @@ const addCountry = async (req, res) => {
 const updateCountry = async (req, res) => {
     try {
         const payload = req.body.countryDetails;
+        const hasData = await countryModel.findOne({ name: payload.name }).exec();
+        if (hasData != null) {
+            return res.status(constants.STATUS_CODES.COUNTRY_WITH_NAME_EXISTS).send({ error: constants.MESSAGES.COUNTRY.NAME_EXISTS })
+        }
         await countryModel.updateOne({ _id: payload._id }, { '$set': payload }, function (err) {
             if (err) {
                 sendError(err, constants.ERRORS.DEFAULT_ERROR);
